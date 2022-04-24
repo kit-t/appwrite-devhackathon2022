@@ -1,6 +1,8 @@
 # appwrite-devhackathon2022
 Submission for Appwrite Hackathon on DEV (2022).
 
+#appwritehack
+
 ### Overview of My Submission
 [Note]: # (Share what you built, how you built it, and the inspiration behind the idea! Please make sure the project links to the appropriate GitHub repository, and includes the [Apache-2 permissive license](https://www.apache.org/licenses/LICENSE-2.0)  and README.)
 
@@ -25,4 +27,16 @@ Submission for Appwrite Hackathon on DEV (2022).
 
 [Reminder]: # (Submissions are due on May 12th, 2022 @ 11:59 PM UTC).
 
-#appwritehack
+## Setup
+- Install [Appwrite](https://appwrite.io/docs/installation)
+  - cd appwrite
+  - add .env (refer .env.example)
+  - `docker-compose up -d --remove-orphans`
+- 
+
+## Useful commands
+- Stop appwrite
+  `docker-compose stop`
+- Uninstall appwrite
+  `docker-compose down -v`
+
