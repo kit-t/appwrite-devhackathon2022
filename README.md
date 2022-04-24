@@ -1,7 +1,7 @@
 # appwrite-devhackathon2022
 Submission for Appwrite Hackathon on DEV (2022).
 
-#appwritehack
+`#appwritehack`, `#appwrite`, `#flutter`
 
 ### Overview of My Submission
 [Note]: # (Share what you built, how you built it, and the inspiration behind the idea! Please make sure the project links to the appropriate GitHub repository, and includes the [Apache-2 permissive license](https://www.apache.org/licenses/LICENSE-2.0)  and README.)
