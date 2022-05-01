@@ -1,5 +1,5 @@
-name: mobile
-description: A new Flutter project.
+name: the_expenses_app
+description: Submission for Appwrite Dev.to Hackathon 2022.
 
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
@@ -36,6 +36,7 @@ dependencies:
   cupertino_icons: ^1.0.2
   appwrite: ^4.0.2
   flutter_platform_widgets: ^1.20.0
+  provider: ^6.0.2
 
 dev_dependencies:
   flutter_test:

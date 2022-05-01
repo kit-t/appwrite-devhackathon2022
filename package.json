@@ -1,0 +1,25 @@
+{
+  "name": "appwrite-devhackathon2022",
+  "version": "1.0.0",
+  "description": "Submission for Appwrite Dev.to Hackathon 2022",
+  "main": "index.js",
+  "scripts": {
+    "dev": "lt --port 80 --subdomain kit-t-appwrite"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kit-t/appwrite-devhackathon2022.git"
+  },
+  "keywords": [
+    "appwritehack"
+  ],
+  "author": "kit-t",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/kit-t/appwrite-devhackathon2022/issues"
+  },
+  "homepage": "https://github.com/kit-t/appwrite-devhackathon2022#readme",
+  "dependencies": {
+    "localtunnel": "^2.0.2"
+  }
+}
