@@ -72,15 +72,18 @@ class AuthState extends ChangeNotifier {
   }
 
   logout() async {
+    _isLoggedIn = false;
+    _user = null;
+    notifyListeners();
     try {
       Response res = await account.deleteSession(sessionId: 'current');
       // print(res.statusCode);
-      _isLoggedIn = false;
-      _user = null;
-      notifyListeners();
+      // _isLoggedIn = false;
+      // _user = null;
+      // notifyListeners();
     } catch (e) {
       // _error = e.message;
-      notifyListeners();
+      // notifyListeners();
     }
   }
 

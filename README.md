@@ -9,12 +9,12 @@ Submission for Appwrite Hackathon on DEV (2022).
 
 ### Submission Category: 
 
-[Note]: # (Web2 Wizards, Web3 Wunderkinds, Mobile Moguls, Wacky Wildcards)
+Mobile Moguls
 
 
 ### Link to Code
 
-[Note]: # (Our markdown editor supports pretty embeds. Try this syntax: `{% embed link_to_your_repo %}` to share a GitHub repository)
+[Note]: # (Our markdown editor supports pretty embeds. Try this syntax: `{% https://github.com/kit-t/appwrite-devhackathon2022 %}` to share a GitHub repository)
 
 
 ### Additional Resources / Info

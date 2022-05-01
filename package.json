@@ -4,7 +4,9 @@
   "description": "Submission for Appwrite Dev.to Hackathon 2022",
   "main": "index.js",
   "scripts": {
-    "dev": "lt --port 80 --subdomain kit-t-appwrite"
+    "start:localtunnel": "lt --port 80 --subdomain kit-t-appwrite",
+    "start:appwrite": "docker compose --project-directory appwrite up -d --remove-orphans",
+    "start": "npm run start:appwrite && npm run start:localtunnel"
   },
   "repository": {
     "type": "git",
