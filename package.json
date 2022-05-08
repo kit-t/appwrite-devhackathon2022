@@ -21,7 +21,9 @@
     "url": "https://github.com/kit-t/appwrite-devhackathon2022/issues"
   },
   "homepage": "https://github.com/kit-t/appwrite-devhackathon2022#readme",
-  "dependencies": {
+  "dependencies": {},
+  "devDependencies": {
+    "appwrite-cli": "^0.16.0",
     "localtunnel": "^2.0.2"
   }
 }
