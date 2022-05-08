@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_expenses_app/features/auth/notifiers/auth_state.dart';
@@ -17,6 +18,8 @@ class _AddExpenseState extends State<AddExpense> {
   final TextEditingController _name = TextEditingController();
   final TextEditingController _totalAmt = TextEditingController();
   final TextEditingController _date = TextEditingController();
+  final ImagePicker _imagePicker = ImagePicker();
+  String? _attachment;
 
   @override
   Widget build(BuildContext context) {
@@ -47,6 +50,19 @@ class _AddExpenseState extends State<AddExpense> {
         ),
         const SizedBox(height: 10.0),
         PlatformElevatedButton(
+          child: const Text('Attachment'),
+          onPressed: () async {
+            XFile? image = await _imagePicker.pickImage(source: ImageSource.gallery);
+            setState(() {
+              _attachment = image?.path;
+            });
+          },
+        ),
+        Center(
+          child: Text(_attachment?.split('/').last ?? ""),
+        ),
+        const SizedBox(height: 10.0),
+        PlatformElevatedButton(
           child: const Text('Save'),
           onPressed: () async {
             String? userId =
@@ -62,16 +78,19 @@ class _AddExpenseState extends State<AddExpense> {
               );
               ExpenseState expenseState =
                   Provider.of<ExpenseState>(context, listen: false);
-              if (await expenseState.createExpense(expense) != null) {
+              if (await expenseState.createExpense(expense, attachmentPath: _attachment) != null) {
                 _name.clear();
                 _totalAmt.clear();
                 _date.clear();
+                setState(() {
+                  _attachment = null;
+                });
               }
             } catch (e) {
               print(e);
             }
           },
-        )
+        ),
       ],
     );
   }

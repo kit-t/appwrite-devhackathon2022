@@ -1,3 +1,4 @@
+import 'dart:typed_data';
 import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/cupertino.dart';
@@ -44,9 +45,17 @@ class ExpenseState extends ChangeNotifier {
     }
   }
 
-  Future<Document?> createExpense(Expense expense) async {
+  Future<Document?> createExpense(Expense expense, { String? attachmentPath }) async {
     Document? result;
     try {
+      if (attachmentPath != null) {
+        final attachment = await Appwrite.storage.createFile(
+            bucketId: Appwrite.expenseAttachmentsBucketId,
+            fileId: 'unique()',
+            file: InputFile(path: attachmentPath),
+        );
+        expense.attachmentId = attachment.$id;
+      }
       result = await Appwrite.database.createDocument(
         collectionId: Appwrite.expensesCollId,
         documentId: 'unique()',
@@ -58,5 +67,31 @@ class ExpenseState extends ChangeNotifier {
       print(e);
     }
     return result;
+  }
+
+  Future<Uint8List?> getAttachmentPreview(String fileId) async {
+    Uint8List? ret;
+    try {
+      ret = await Appwrite.storage.getFilePreview(
+          bucketId: Appwrite.expenseAttachmentsBucketId,
+          fileId: fileId
+      );
+    } catch (e) {
+      print(e);
+    }
+    return ret;
+  }
+
+  Future<File?> getAttachmentFile(String fileId) async {
+    File? file;
+    try {
+      file = await Appwrite.storage.getFile(
+          bucketId: Appwrite.expenseAttachmentsBucketId,
+          fileId: fileId
+      );
+    } catch (e) {
+      print(e);
+    }
+    return file;
   }
 }

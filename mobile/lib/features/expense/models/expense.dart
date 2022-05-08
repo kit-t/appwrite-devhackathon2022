@@ -3,6 +3,7 @@ class ExpenseFields {
   static const String name = "name";
   static const String totalAmt = "totalAmt";
   static const String userId = "userId";
+  static const String attachmentId = "attachmentId";
   static const String date = "date";
   static const String createdAt = "createdAt";
   static const String updatedAt = "updatedAt";
@@ -13,6 +14,7 @@ class Expense {
   late String name;
   late double totalAmt;
   String? userId;
+  String? attachmentId;
   late DateTime date;
   DateTime? createdAt;
   DateTime? updatedAt;
@@ -22,6 +24,7 @@ class Expense {
     required this.name,
     required this.totalAmt,
     this.userId,
+    this.attachmentId,
     required this.date,
     this.createdAt,
     this.updatedAt,
@@ -32,6 +35,7 @@ class Expense {
     name = json[ExpenseFields.name];
     totalAmt = json[ExpenseFields.totalAmt].toDouble();
     userId = json[ExpenseFields.userId];
+    attachmentId = json[ExpenseFields.attachmentId];
     date = DateTime.fromMillisecondsSinceEpoch(json[ExpenseFields.date]);
     createdAt = DateTime.fromMillisecondsSinceEpoch(json[ExpenseFields.createdAt]);
     updatedAt = DateTime.fromMillisecondsSinceEpoch(json[ExpenseFields.updatedAt]);
@@ -43,6 +47,7 @@ class Expense {
     json[ExpenseFields.name] = name;
     json[ExpenseFields.totalAmt] = totalAmt;
     json[ExpenseFields.userId] = userId;
+    json[ExpenseFields.attachmentId] = attachmentId;
     json[ExpenseFields.date] = date.millisecondsSinceEpoch;
     json[ExpenseFields.createdAt] = createdAt?.millisecondsSinceEpoch;
     json[ExpenseFields.updatedAt] = updatedAt?.millisecondsSinceEpoch;
