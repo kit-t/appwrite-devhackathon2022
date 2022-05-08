@@ -13,7 +13,7 @@ class Appwrite {
   static Database get database => Database(_client);
   static Account get account => Account(_client);
   static Storage get storage => Storage(_client);
-  static Locale get locale => Locale(_client);
+  static Realtime get realtime => Realtime(_client);
 
   static final Appwrite _instance = Appwrite._internal();
   Appwrite._internal();

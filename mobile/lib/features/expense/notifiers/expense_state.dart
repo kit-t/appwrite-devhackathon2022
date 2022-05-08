@@ -1,3 +1,4 @@
+import 'package:appwrite/appwrite.dart';
 import 'package:appwrite/models.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:the_expenses_app/features/expense/models/expense.dart';
@@ -6,14 +7,25 @@ import 'package:the_expenses_app/utils/appwrite.dart';
 
 class ExpenseState extends ChangeNotifier {
   List<Expense> _expenses = [];
+  RealtimeSubscription? _subscription;
 
   List<Expense> get expenses => _expenses;
 
   Future<void> setUser(custom_user.User? user) async {
     if (user != null) {
       await _getExpenses();
+      _subscription = Appwrite.realtime
+          .subscribe(["collections.${Appwrite.expensesCollId}.documents"]);
+      _subscription?.stream.listen((response) async {
+        await _getExpenses();
+        notifyListeners();
+      });
     } else {
       _expenses = [];
+      if (_subscription != null) {
+        _subscription?.close();
+        _subscription = null;
+      }
     }
     notifyListeners();
   }
@@ -25,8 +37,8 @@ class ExpenseState extends ChangeNotifier {
         orderAttributes: ['date'],
         orderTypes: ['DESC'],
       );
-      _expenses =
-      List<Expense>.from(result.documents.map((e) => e.convertTo(Expense.fromJson)));
+      _expenses = List<Expense>.from(
+          result.documents.map((e) => e.convertTo(Expense.fromJson)));
     } catch (e) {
       print(e);
     }
@@ -42,9 +54,6 @@ class ExpenseState extends ChangeNotifier {
         read: ["user:${expense.userId}"],
         write: ["user:${expense.userId}"],
       );
-      // _expenses.add(result.convertTo(Expense.fromJson));
-      await _getExpenses();
-      notifyListeners();
     } catch (e) {
       print(e);
     }
