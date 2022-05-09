@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_platform_widgets/flutter_platform_widgets.dart';
 import 'package:provider/provider.dart';
 import 'package:the_expenses_app/features/auth/notifiers/auth_state.dart';
+import 'package:the_expenses_app/features/expense/notifiers/expense_state.dart';
 import 'package:the_expenses_app/routes.dart';
 
 class SignUpPage extends StatefulWidget {
@@ -36,6 +37,7 @@ class _SignUpPageState extends State<SignUpPage> {
             PlatformTextField(
               controller: _email,
               hintText: 'Email',
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 10.0),
             PlatformTextField(
@@ -52,6 +54,7 @@ class _SignUpPageState extends State<SignUpPage> {
                       Provider.of<AuthState>(context, listen: false);
                   if (await state.createAccount(
                       _name.text, _email.text, _password.text)) {
+                    Provider.of<ExpenseState>(context, listen: false).setUser(state.user);
                     Navigator.pushReplacementNamed(context, AppRoutes.home);
                   }
                 },

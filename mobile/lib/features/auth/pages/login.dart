@@ -31,6 +31,7 @@ class _LoginPageState extends State<LoginPage> {
             PlatformTextField(
               controller: _email,
               hintText: "Email",
+              keyboardType: TextInputType.emailAddress,
             ),
             const SizedBox(height: 10.0),
             PlatformTextField(
