@@ -8,7 +8,9 @@ import 'package:the_expenses_app/features/expense/models/expense.dart';
 import 'package:the_expenses_app/features/expense/notifiers/expense_state.dart';
 
 class AddExpense extends StatefulWidget {
-  const AddExpense({Key? key}) : super(key: key);
+  const AddExpense({Key? key, this.tabController}) : super(key: key);
+
+  final PlatformTabController? tabController;
 
   @override
   State<AddExpense> createState() => _AddExpenseState();
@@ -85,6 +87,7 @@ class _AddExpenseState extends State<AddExpense> {
                 setState(() {
                   _attachment = null;
                 });
+                widget.tabController?.setIndex(context, 0);
               }
             } catch (e) {
               print(e);

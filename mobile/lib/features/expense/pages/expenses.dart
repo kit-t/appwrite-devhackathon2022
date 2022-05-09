@@ -17,37 +17,39 @@ class ExpensesPage extends StatefulWidget {
 
 class _ExpensesPageState extends State<ExpensesPage> {
   static final titles = ['Expenses', 'Add Expense'];
-  final items = (BuildContext context) => [
+  _items (context) {
+    return [
         BottomNavigationBarItem(
-          icon: Icon(Icons.list),
+          icon: const Icon(Icons.list),
           label: titles[0],
         ),
         BottomNavigationBarItem(
-          icon: Icon(Icons.add),
+          icon: const Icon(Icons.add),
           label: titles[1],
         ),
       ];
-  late PlatformTabController _tabController;
+  }
+  late PlatformTabController tabController;
   late List<Widget> tabs;
 
   @override
   void initState() {
     super.initState();
 
-    _tabController = PlatformTabController(
+    tabController = PlatformTabController(
       initialIndex: 0,
     );
 
     tabs = [
-      ExpenseList(),
-      AddExpense(),
+      const ExpenseList(),
+      AddExpense(tabController: tabController),
     ];
   }
 
   @override
   Widget build(BuildContext context) {
     return PlatformTabScaffold(
-      tabController: _tabController,
+      tabController: tabController,
       appBarBuilder: (_, index) => PlatformAppBar(
         title: PlatformText(titles[index]),
         trailingActions: [
@@ -67,7 +69,7 @@ class _ExpensesPageState extends State<ExpensesPage> {
         index: index,
         children: tabs,
       ),
-      items: items(context),
+      items: _items(context),
     );
   }
 }

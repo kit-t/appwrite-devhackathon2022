@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 import 'package:the_expenses_app/features/expense/models/expense.dart';
 import 'package:the_expenses_app/features/expense/notifiers/expense_state.dart';
+import 'package:the_expenses_app/features/expense/widgets/fullscreen_image.dart';
 
 class ExpenseListItem extends StatelessWidget {
   const ExpenseListItem({
@@ -22,14 +23,29 @@ class ExpenseListItem extends StatelessWidget {
               future: Provider.of<ExpenseState>(context, listen: false)
                   .getAttachmentPreview(expense.attachmentId!),
               builder: (context, AsyncSnapshot<Uint8List?> snapshot) {
-                // TODO: download file or open image in a viewer onPressed
                 return snapshot.hasData && snapshot.data != null
-                    ? Image.memory(snapshot.data!)
+                    ? GestureDetector(
+                        onTap: () {
+                          Navigator.push(context,
+                              MaterialPageRoute(builder: (_) {
+                            return FullscreenImage(
+                              child: Image.memory(snapshot.data!),
+                              tag: expense.attachmentId!,
+                            );
+                          }));
+                        },
+                        child: Hero(
+                          tag: expense.attachmentId!,
+                          child: Image.memory(snapshot.data!),
+                        ))
                     : const CircularProgressIndicator();
               })
-          : const Icon(CupertinoIcons.money_dollar_circle),
+          : const Icon(
+              CupertinoIcons.money_dollar_circle,
+              size: 36.0,
+            ),
       title: Text(
-        "${expense.name}",
+        expense.name,
         style: Theme.of(context).textTheme.headline5,
       ),
       subtitle: Text(
